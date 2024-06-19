@@ -1,0 +1,142 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>SHOP PRODUCT ONLINE</title>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/main.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    </h:head>
+    <a id="close-sidebar-nav"><i class="fa fa-times"></i></a>
+    <nav id="sidebar-nav">
+        <div id="sidebar-nav-logo">
+            <img class="penci-lazy" src="http://max.soledad.pencidesign.com/wp-content/uploads/2017/07/defaultlogo-mobile.png" alt="Soledad – Multi-Concept Blog/Magazine WordPress Theme" style="display: inline;"/>
+        </div>
+        <ul class="menu-mobile">
+            <li><a href="">home</a></li>
+            <li class="has-child"><a href="">category <i class="fas fa-angle-down"></i></a>
+                <ul class="sub-menu-mobile">
+                    <c:forEach items="#{categoryMB.list}" var="itemCategory">
+                        <li>
+                            <h:form>
+                                <h:commandLink action="#{categoryMB.toCategory(itemCategory.categoryID)}">#{itemCategory.categoryName}</h:commandLink>
+                            </h:form>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </li>
+            <li><a href="">blog</a></li>
+            <li><a href="">cart</a></li>
+        </ul>
+    </nav>
+    <nav class="navigation">
+        <div class="container">
+            <div class="button-menu">
+                <i class="fa fa-bars"></i>
+            </div>
+            <ul class="menu">
+                <li class="menu-item"><a href="#{request.contextPath}/">home</a>
+                </li>
+                <li class="menu-item"><a href="">category <i class="fas fa-angle-down"></i></a>
+                    <ul class="sub-menu">
+                        <c:forEach items="#{categoryMB.list}" var="itemCategory">
+                            <li>
+                                <h:form>
+                                    <h:commandLink action="#{categoryMB.toCategory(itemCategory.categoryID)}">#{itemCategory.categoryName}</h:commandLink>
+                                </h:form>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="">blog</a>
+                </li>
+                <li class="menu-item"><a href="">cart</a></li>
+            </ul>
+            <div id="top-search" class="dropdown">
+                <a class="avt-user"><i class="fa fa-user dropdown-toggle" data-toggle="user-menu"></i></a>
+                <ul id="user-menu" class="dropdown-menu">
+                    <c:if test="#{not empty user}">
+                        <li class="dropdown-menu-item">
+                            <a href="" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-menu-item">
+                            <h:form>
+                                <h:commandLink action="#{customerMB.logOut()}" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </div>
+                                <span>Log out</span>
+                                </h:commandLink>
+                            </h:form>
+                        </li>
+                    </c:if>
+                    <c:if test="#{empty user}">
+                        <li class="dropdown-menu-item">
+                            <h:link outcome="/login" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </div>
+                                <span>Sign in</span>
+                            </h:link>
+                        </li>
+                        <li class="dropdown-menu-item">
+                            <h:link outcome="/register" class="dropdown-menu-link">
+                                 <div>
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <span>Sign up</span>
+                            </h:link>
+                        </li>
+
+                    </c:if>
+                </ul>
+            </div>
+            <div id="top-search">
+                <a class="search-click"><i class="fa fa-search"></i></a>
+                <div class="show-search">
+                    <form action="" method="get">
+                        <div>
+                            <input type="text" placeholder="Type and hit enter..." id="" class="search-input"/>
+                        </div>
+                    </form>
+                    <a class="search-click close-search">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="top-search" class="shopping-cart-icon">
+                <h:link outcome="/cart" class="cart-contents">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>#{cartMB.cart.size()}</span>
+                </h:link>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </nav>
+    <header>
+        <div class="inner-header">
+            <div class="container">
+                <div id="logo">
+                    <a href=""><img src="http://max.soledad.pencidesign.com/wp-content/uploads/2017/07/defaultlogo@2x.png"/></a>
+                </div>
+                <div class="header-slogan">
+                    <h2 class="slogan-text">BEST FOR SHOPPING</h2>
+                </div>
+                <div class="header-social">
+                    <div class="inner-header-social">
+                        <a href="" rel="nofollow" target="_blank"><i class="fab fa-facebook-f"></i></a> 
+                        <a href="#" rel="nofollow" target="_blank"><i class="fab fa-twitter"></i></a> 
+                        <a href="#" rel="nofollow" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</ui:composition>

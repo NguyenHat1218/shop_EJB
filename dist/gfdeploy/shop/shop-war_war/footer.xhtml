@@ -1,0 +1,46 @@
+<ui:composition 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <footer>
+        <div class="footer-content">
+            <div class="footer-layout">
+                <h2 class="title">FOLLOW US</h2>
+                <div class="follows">
+                    <div class="follows-item">
+                        <a href="">Facebook</a>
+                        <a href="">Instagram</a>
+                        <a href="">Twitter</a>
+                        <a href="">Youtube</a>
+                    </div>
+                </div>
+            </div>
+            <!-- footer layout -->
+            <div class="footer-layout">
+                <h2 class="title">SITE MAP</h2>
+                <div class="follows">
+                    <div class="follows-item">
+                        <h:link outcome="aboutus">About us</h:link>
+                        <h:link outcome="privacy">Policy</h:link>
+                        <h:link outcome="license">License</h:link>
+                        <h:link outcome="helps">Helps</h:link>
+                    </div>
+                </div>
+            </div>
+            <!-- footer layout -->
+        </div>
+        <br/>
+        <div class="center">
+             
+            <div class="signature">
+                <span>Design by LÊ NGUYỄN HẠT</span>
+                
+            </div>
+        </div>
+    </footer>
+    <script src="#{request.contextPath}/resources/js/app.js"></script>
+    <div class="feedback">
+        <h:link outcome="feedback" class="feedback-icon">
+            <img src="#{request.contextPath}/resources/img/feedback.png" alt=""/>
+        </h:link>
+    </div>
+</ui:composition>

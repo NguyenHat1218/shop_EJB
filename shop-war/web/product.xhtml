@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <ui:include src="header.xhtml"/>
+    <c:set var="product" value="#{productMB.product}"/>
+    <div class="body-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <span><a href="">Home</a></span>
+                <i class="fa fa-angle-right"></i>
+                <span><a href="">#{product.getCategoryID().getCategoryName()}</a></span>
+                <i class="fa fa-angle-right"></i>
+                #{product.productName}
+            </div>
+            <!-- title -->
+            <c:if test="#{cartMB.success == true}">
+                <div class="message-success">
+                    <i class="fas fa-check-circle"></i>
+                    <h:link outcome="cart" class="button wc-forward">View cart</h:link>
+                    “#{product.productName}” has been added to your cart.
+                </div>
+            </c:if>
+            <c:if test="#{cartMB.soldout == true}">
+                <div class="message-error">
+                    <i class="fas fa-times-circle"></i>
+                    Sorry, but the stock is out of stock !
+                </div>
+            </c:if>
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{cartMB.init()}" />
+            </f:metadata>
+            <div class="product-container">
+                <div class="product-details">
+                    <div class="product-main">
+                        <img src="#{request.contextPath}/resources/thumbnail/#{product.thumbnail}" alt="" class="product-highlight"/>
+                    </div>
+                    <div class="product-review">
+                        <ul class="product-list-thumb">
+                            <li><img src="#{request.contextPath}/resources/thumbnail/#{product.thumbnail}"
+                                     class="product-review-small active"/>
+                            </li>
+                            <c:forEach items="#{productMB.getPreview()}" var="itemPreview">
+                                <li><img src="#{request.contextPath}/resources/preview/#{itemPreview.imagePath}"
+                                         class="product-review-small"/>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+                <!-- product details -->
+                <div class="product-action">
+                    <h1 class="product-title">#{product.productName}</h1>
+                    <p class="price">
+                        <span>$</span>
+                        #{product.unitPrice}
+                    </p>
+                    <div class="product-des">
+                        <p>
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia consequuntur magni
+                            lores eos qui ratione voluptatem sequi nesciunt. Neque porro lorem quisquam est, qui dolorem ipsum quia dolor sit amet.
+                            <br/>
+                            <br/>
+                            Designed for simplicity and made from high quality aterials. 
+                            Its sleek geometry and ipsut material combinations creates a modern personalized look.
+                        </p>
+                    </div>
+                    <h:form class="product-form">
+                        <div class="quantity"> <input type="number" class="input-text qty text" step="1" min="1" max="" jsf:id="quantity"
+                                                      name="quantity" value="#{cartMB.quantity}" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"/>
+                        </div>
+                        <h:commandButton action="#{cartMB.addToCart(product.productID)}" class="btn-cart" value="Add to cart"/>
+                        <div class="clear"></div>
+                    </h:form>
+                </div>
+            </div>
+            <!-- product container -->
+            <div class="product-section">
+                <div class="product-tab">
+                    <button class="tablinks active" data-id="description">DESCRIPTION</button>
+                    <button class="tablinks" data-id="information">ADDITIONAL INFORMATION</button>
+                    <button class="tablinks" data-id="review">REVIEWS (#{productMB.productComment().size()})</button>
+                </div>
+                <div id="description" class="tabcontent">
+                    <h:outputText value="#{product.description}" escape="false"/>
+                </div>
+
+                <div id="information" class="tabcontent">
+                   Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia consequuntur magni lores eos
+                   qui ratione voluptatem sequi nesciunt. Neque porro lorem quisquam est, qui dolorem ipsum quia dolor sit amet.
+                </div>
+                <div id="review" class="tabcontent">
+                    <h2>REVIEWS</h2>
+                    <c:if test="#{not empty user}">
+                    <h:form class="form-reivew">
+                        <div class="comment-form-rating">
+                            <label for="rating">Your rating</label>
+                            <h:selectOneMenu value="#{productMB.rating}" id="rating">
+                                <f:selectItem itemValue="1" itemLabel="1 star rating"/>
+                                <f:selectItem itemValue="2" itemLabel="2 star rating"/>
+                                <f:selectItem itemValue="3" itemLabel="3 star rating"/>
+                                <f:selectItem itemValue="4" itemLabel="4 star rating"/>
+                                <f:selectItem itemValue="5" itemLabel="5 star rating"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <p class="comment-form-comment">
+                            <label for="comment">Your review <span class="required">*</span></label>
+                            <h:inputTextarea rows="8" value="#{productMB.cmtReview}"/>
+                            
+                        </p>
+                        <p class="form-submit">
+                            <h:commandButton action="#{productMB.doComment()}" class="submit" value="Post"/>
+                        </p>
+                    </h:form>
+                    </c:if>
+                    <c:if test="#{empty user}">
+                        <div class="empty">
+                            Please, let <h:link outcome="login">Login</h:link> to discuses about this product.
+                        </div>
+                    </c:if>
+                    <!-- <p class="noreview">There are no reviews yet.</p> -->
+                    <div id="comments">
+                        <h2>Comments</h2>
+                        <c:if test="#{productMB.listReview.size() == 0}">
+                            <div class="empty">be the first one review this product !</div>
+                        </c:if>
+                        <ul class="list-comments">
+                            <c:forEach items="#{productMB.listReview}" var="itemComment">
+                                <li class="comment">
+                                    <div class="comment-avatar">
+                                        <img src="#{request.contextPath}/resources/img/avatar.jpg" alt=""/>
+                                    </div>
+                                    <div class="comment-content">
+                                        <p class="comment-author"><a href="">#{itemComment.customerID.username}</a></p>
+                                        <p>Rate
+                                            <span class="star">
+                                                <c:forEach items="#{productMB.loopStar(itemComment.rating)}" var="star">
+                                                    <i class="fas fa-star"></i>
+                                                </c:forEach>
+                                                 <c:forEach items="#{productMB.loopNot(itemComment.rating)}" var="star">
+                                                    <i class="far fa-star"></i>
+                                                </c:forEach>
+                                            </span>
+                                        </p>
+                                        <p class="msg">#{itemComment.message}</p>
+                                        <span class="comment-time">#{itemComment.createdat}</span>
+                                    </div>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- product section -->
+            <div class="product-related">
+                <h2>Related Products</h2>
+                <ul class="product-related__list">
+                    <c:forEach items="#{productMB.relatedProducts()}" var="productItem">
+                        <li>
+                            <h:form>
+                                <h:commandLink action="#{productMB.seeProduct(productItem.productID)}">
+                                    <img src="#{request.contextPath}/resources/thumbnail/#{productItem.thumbnail}"/>
+                                    <h2>#{productItem.productName}</h2>
+                                    <span class="price">$#{productItem.unitPrice}</span>
+                                </h:commandLink>
+                            </h:form>
+                            <h:form>
+                                <h:commandButton action="#{cartMB.orderBefore(productItem.productID)}" class="btn-order" value="Add to cart"/>
+                            </h:form>
+                        </li>
+                    </c:forEach>
+                </ul>
+                <!-- list related products -->
+            </div>
+        </div>
+    </div>
+    <div class="clear-footer"></div>
+    <ui:include src="footer.xhtml"/>
+</html>

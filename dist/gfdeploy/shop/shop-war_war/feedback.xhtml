@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <div class="container">
+        <div class="body-content">
+            <h2>Feedback</h2>
+            <div class="feedback-container">
+                <div class="center">
+                    <c:if test="#{not empty feedbackMB.message}">
+                        <h:outputText value="#{feedbackMB.message}" class="success"/>
+                    </c:if>
+                </div>
+                <h:form>
+                    <div class="feedback-input">
+                        <p>Email</p>
+                        <h:messages for="email" class="list-error"/>
+                        <h:inputText id="email" value="#{feedbackMB.email}" class="form-control" required="true" requiredMessage="Please, enter an email address" validatorMessage="Email is not valid">
+                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                        </h:inputText>
+                    </div>
+                    <div class="feedback-input">
+                        <p>Title</p>
+                        <h:messages for="title" class="list-error"/>
+                        <h:inputText id="title" value="#{feedbackMB.title}" class="form-control" required="true" requiredMessage="Please, enter the title"/>
+                    </div>
+                    <div class="feedback-input">
+                        <p>Description</p>
+                        <h:messages for="des" class="list-error"/>
+                        <h:inputTextarea id="des" value="#{feedbackMB.description}" class="form-control" rows="7" required="true" requiredMessage="Please, enter description about your problem"/>
+                    </div>
+                    <div class="feedback-input">
+                        <h:commandButton action="#{feedbackMB.sendFeedback()}" class="btn-fb" value="Send"/>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </div>
+    <ui:include src="footer.xhtml"/>
+</html>
+

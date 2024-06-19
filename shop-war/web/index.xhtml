@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <div class="body-content">
+        <div class="container">
+            <div class="shop-layout-left">
+                <h3 class="shop-title">NEW PRODUCTS</h3>
+                <c:if test="#{cartMB.soldout == true}">
+                    <div class="message-error">
+                        <i class="fas fa-times-circle"></i>
+                        Sorry, but the stock is out of stock !
+                    </div>
+                </c:if>
+                <f:metadata>
+                    <f:event type="preRenderView" listener="#{cartMB.init()}" />
+                </f:metadata>
+                <div class="shop-product">
+                    <c:forEach items="#{productMB.newProducts}" var="itemPro">
+                        <div class="product-item">
+                            <div class="product-image">
+                                <h:form>
+                                    <h:commandLink action="#{productMB.seeProduct(itemPro.productID)}">
+                                        <img src="#{request.contextPath}/resources/thumbnail/#{itemPro.thumbnail}"/>
+                                    </h:commandLink>
+                                </h:form>
+                                <c:if test="#{itemPro.quantity == 0}">
+                                    <p class="soldout">Sold out</p>
+                                </c:if>
+
+                            </div>
+                            <div class="product-info">
+                                <p class="title">#{itemPro.productName}</p>
+                                <p class="price">$#{itemPro.unitPrice}0</p>
+                                <h:form>
+                                    <h:commandLink action="#{cartMB.orderBefore(itemPro.productID)}" class="btn-order" value="Add to cart"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <!-- product item -->
+                </div>
+            </div>
+            <!-- layout shop left-->
+            <div class="shop-layout-right">
+                <div class="product-categories">PRODUCT CATEGORIES</div>
+                <div class="product-categories-item">
+                    <c:forEach items="#{categoryMB.list}" var="itemCategory">
+                        <h:form>
+                            <h:commandLink action="#{categoryMB.toCategory(itemCategory.categoryID)}">#{itemCategory.categoryName} (#{categoryMB.countProducts(itemCategory.categoryID)})</h:commandLink>
+                        </h:form>
+                    </c:forEach>
+                </div>
+            </div>
+            <!-- shop layout right -->
+            <div class="clear"></div>
+            <div class="blog-container">
+                <h2 class="title-topic">Blog</h2>
+                <div class="blog-list">
+                    <c:forEach items="#{cpBlog.showAllBlog}" var="itemBlog">
+                        <div class="blog-item">
+                            <h:form>
+                                <h:commandLink action="#{blogMB.viewBlog(itemBlog.blogID)}">
+                                    <img src="#{request.contextPath}/resources/blog/#{itemBlog.thumbnail}"/>
+                                </h:commandLink>
+                            </h:form>
+                            <h3><a href="">#{itemBlog.title}</a></h3>
+                            <span class="blog-time">#{itemBlog.createdat}</span>
+                        </div>
+                    </c:forEach>
+                    <!-- item -->
+                </div>
+                <br/>
+                <div class="center"><h:link outcome="listBlog" class="btn-link">See more</h:link></div>
+            </div>
+        </div>
+    </div>
+    <div class="clear-footer"></div>
+    <ui:include src="footer.xhtml"/>
+</html>

@@ -1,0 +1,131 @@
+/*Giao dien cho trang dang nhap
+CSS for page Login*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: 'Poppins', sans-serif;
+}
+a {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #4272d7;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.error{
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.txt {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #999999;
+}
+
+.container {
+  width: 100%;
+  background-color: #e9faff;
+  padding: 15px;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.box {
+  background-color: #fff;
+  width: 500px;
+  -webkit-box-shadow: 0 3px 20px 0px rgba(128, 123, 123, 0.2);
+          box-shadow: 0 3px 20px 0px rgba(128, 123, 123, 0.2);
+  padding: 65px 55px 50px 55px;
+  border-radius: 10px;
+}
+
+.box .form-login {
+  text-align: center;
+}
+
+.box .form-login .title-login {
+  display: block;
+  font-size: 30px;
+  color: #555555;
+  line-height: 1.2;
+  text-align: center;
+  padding-bottom: 33px;
+}
+
+.box .form-login .input {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+}
+
+.box .form-login .input input {
+  height: 68px;
+  padding: 0 25px 0 25px;
+  display: block;
+  width: 100%;
+  background: transparent;
+  font-size: 15px;
+  color: #666666;
+  outline: none;
+  border: none;
+  line-height: 1.2;
+}
+
+.box .form-login .input-btn {
+  margin-top: 20px;
+}
+
+.box .form-login .input-btn input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 60px;
+  background-color: #4272d7;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  outline: none !important;
+  cursor: pointer;
+  border: none;
+}
+
+.box .form-login .input-btn input:hover {
+  background-color: #333434;
+}
+
+.box .form-login .text-center {
+  padding-top: 45px;
+  text-align: center;
+}

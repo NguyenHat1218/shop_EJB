@@ -1,0 +1,152 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>SHOP PRODUCT ONLINE</title>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/main.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    </h:head>
+    <a id="close-sidebar-nav"><i class="fa fa-times"></i></a>
+    <nav id="sidebar-nav">
+        <div id="sidebar-nav-logo">
+            <img src="#{request.contextPath}/resources/img/logo1.png"/>
+        </div>
+        <ul class="menu-mobile">
+            <li><a href="">home</a></li>
+            <li class="has-child"><a href="">category <i class="fas fa-angle-down"></i></a>
+                <ul class="sub-menu-mobile">
+                    <c:forEach items="#{categoryMB.list}" var="itemCategory">
+                        <li>
+                            <h:form>
+                                <h:commandLink action="#{categoryMB.toCategory(itemCategory.categoryID)}">#{itemCategory.categoryName}</h:commandLink>
+                            </h:form>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </li>
+            <li><h:link outcome="listBlog">blog</h:link></li>
+            <li><h:link outcome="cart">cart</h:link></li>
+        </ul>
+    </nav>
+    <nav class="navigation scrolling">
+        <div class="container">
+            <div class="button-menu">
+                <i class="fa fa-bars"></i>
+            </div>
+            <ul class="menu">
+                <li class="menu-item"><a href="#{request.contextPath}/">home</a>
+                </li>
+                <li class="menu-item"><a href="">category <i class="fas fa-angle-down"></i></a>
+                    <ul class="sub-menu">
+                        <c:forEach items="#{categoryMB.list}" var="itemCategory">
+                            <li>
+                                <h:form>
+                                    <h:commandLink action="#{categoryMB.toCategory(itemCategory.categoryID)}">#{itemCategory.categoryName}</h:commandLink>
+                                </h:form>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </li>
+                <li class="menu-item"><h:link outcome="listBlog">blog</h:link>
+                </li>
+                <li class="menu-item">
+                    <h:link outcome="cart">Cart</h:link>
+                </li>
+            </ul>
+            <div id="top-search" class="dropdown">
+                <a class="avt-user"><i class="fa fa-user dropdown-toggle" data-toggle="user-menu"></i></a>
+                <ul id="user-menu" class="dropdown-menu">
+                    <c:if test="#{not empty user}">
+                        <li class="dropdown-menu-item">
+                            <h:link outcome="profile" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                    <span>Profile</span>
+                            </h:link>
+                        </li>
+                        <li class="dropdown-menu-item">
+                            <h:link outcome="myOrder" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <span>My Orders</span>
+                            </h:link>
+                        </li>
+                        <c:if test="#{not empty right and right eq 'admin'}">
+                        <li class="dropdown-menu-item">
+                            <h:link outcome="admin/index" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span>Administrator</span>
+                            </h:link>
+                        </li>
+                        </c:if>
+                        <li class="dropdown-menu-item">
+                            <h:form>
+                                <h:commandLink action="#{customerMB.logOut()}" class="dropdown-menu-link">
+                                    <div>
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </div>
+                                    <span>Log out</span>
+                                </h:commandLink>
+                            </h:form>
+                        </li>
+                    </c:if>
+                    <c:if test="#{empty user}">
+                        <li class="dropdown-menu-item">
+                            <h:link outcome="login" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </div>
+                                <span>Sign in</span>
+                            </h:link>
+                        </li>
+                        <li class="dropdown-menu-item">
+                            <h:link outcome="register" class="dropdown-menu-link">
+                                <div>
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <span>Sign up</span>
+                            </h:link>
+                        </li>
+
+                    </c:if>
+                </ul>
+            </div>
+            <div id="top-search">
+                <h:link outcome="search"><i class="fa fa-search"></i></h:link>
+            </div>
+            <div id="top-search" class="shopping-cart-icon">
+                <h:link outcome="cart" class="cart-contents">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>#{cartMB.cart.size()}</span>
+                </h:link>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </nav>
+    <header>
+        <div class="inner-header">
+            <div class="container">
+                <div id="logo">
+                    <a href=""><img src="#{request.contextPath}/resources/img/logo1.png"/></a>
+                </div>
+                <div class="header-slogan">
+                    <h2 class="slogan-text">BEST FOR SHOPPING</h2>
+                </div>
+                <div class="header-social">
+                    <div class="inner-header-social">
+                        <a href="" rel="nofollow" target="_blank"><i class="fab fa-facebook-f"></i></a> 
+                        <a href="#" rel="nofollow" target="_blank"><i class="fab fa-twitter"></i></a> 
+                        <a href="#" rel="nofollow" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</ui:composition>

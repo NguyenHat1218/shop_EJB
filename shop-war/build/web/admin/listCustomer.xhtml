@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>List Customer</h3>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>List Customer</h3>
+                    </div>
+                    <div class="card-content">
+                        <h:dataTable value="#{cpCustomer.listCustomers}" var="item">
+                            <h:column>
+                                <f:facet name="header">ID</f:facet>
+                                <h:outputText value="#{item.customerID}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Username</f:facet>
+                                <h:outputText value="#{item.username}"/>
+                            </h:column>
+                          
+                            <h:column>
+                                <f:facet name="header">Email</f:facet>
+                                <h:outputText value="#{item.email}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Full name</f:facet>
+                                <h:outputText value="#{item.fullname}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Birthday</f:facet>
+                                <h:outputText value="#{item.birthday}"/>
+                            </h:column>
+                             <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                <h:commandButton rendered="#{item.block eq 0}" class="stt success" value="Active"></h:commandButton>
+                                <h:commandButton rendered="#{item.block eq 1}" class="stt cancel" value="Block"></h:commandButton>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Operation</f:facet>
+                                <h:form>
+                                    <h:commandButton action="#{cpCustomer.editCus(item.customerID)}" value="Edit" class="btn btn-warning"/>
+                                    <h:commandButton rendered="#{item.block eq 0}" action="#{cpCustomer.blockUser(item.customerID)}" value="Block" class="btn btn-danger"/>
+                                    <h:commandButton rendered="#{item.block eq 1}" action="#{cpCustomer.blockUser(item.customerID)}" value="Unblock" class="btn btn-success"/>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+                <div class="center">
+                <div class="pagination">
+                    <h:form>
+                        <c:forEach var="page" begin="1" end="#{cpCustomer.countPage()}">
+                            <h:commandButton action="#{cpCustomer.showPagination(page)}" value="#{page}" class="page-item #{cpOrder.currentPage == page ? 'active': ''}"/>
+                        </c:forEach>
+                    </h:form>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- end row-->
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>

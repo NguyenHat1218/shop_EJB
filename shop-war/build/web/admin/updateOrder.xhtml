@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>Update Order</h3>
+        </div>
+        <div class="col-6 col-sm-6" style="margin-top:10px">
+            <h:link outcome="listOrder" class="button"><i class="fas fa-plus"></i> Back to list</h:link>
+        </div>
+        <h:form>
+            <div class="row">
+                <div class="col-12">
+                    <h:inputHidden value="#{cpOrder.orderID}"/>
+                    <div clas="center"><h2>Information</h2></div>
+                    <table class="info">
+                        <tr>
+                            <td>Order ID</td>
+                            <td>#{cpOrder.order.orderID}</td>
+                        </tr>
+                        <tr>
+                            <td>Customer</td>
+                            <td>#{cpOrder.order.customerID.username}</td>
+                        </tr>
+                        <tr>
+                            <td>Order Date</td>
+                            <td>#{cpOrder.order.orderDate}</td>
+                        </tr>
+                        <tr>
+                            <td>Ship Via</td>
+                            <td>#{cpOrder.order.shipVia.companyName}</td>
+                        </tr>
+                        <tr>
+                            <td>Freight</td>
+                            <td>#{cpOrder.order.freight}</td>
+                        </tr>
+                        <tr>
+                            <td>Ship Address</td>
+                            <td>#{cpOrder.order.shipAddress}</td>
+                        </tr>
+                        <tr>
+                            <td>Ship City</td>
+                            <td>#{cpOrder.order.shipCity}</td>
+                        </tr>
+                        <tr>
+                            <td>Ship Country</td>
+                            <td>#{cpOrder.order.shipCountry}</td>
+                        </tr>
+                        <tr>
+                            <td>Ship Phone</td>
+                            <td>#{cpOrder.order.shipPhone}</td>
+                        </tr>
+                        <tr>
+                            <td>Status of Order</td>
+                            <td>
+                                <h:form>
+                                    <h:commandButton rendered="#{cpOrder.status eq 0}" class="stt waiting" value="Waiting"></h:commandButton>
+                                    <h:commandButton rendered="#{cpOrder.status eq 1}" class="stt cancel" value="Cancel"></h:commandButton>
+                                    <h:commandButton rendered="#{cpOrder.status eq 2}" class="stt success" value="Success"></h:commandButton>
+                                </h:form>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="total">
+                        Total: <span>$ #{cpOrder.payment}</span>
+                    </div>
+                    <!-- end input -->
+                    <div class="box-input">
+                        <p>Status : </p>
+                        <h:selectOneMenu value="#{cpOrder.status}" class="form-control">
+                            <f:selectItem itemLabel="Waiting" itemValue="0"/>
+                            <f:selectItem itemLabel="Cancel" itemValue="1"/>
+                            <f:selectItem itemLabel="Success" itemValue="2"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="box-input">
+                        <div class="center">
+                            <h:commandButton action="#{categoryMB.saveCategory()}" class="btn btn-create" value="Update"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col 12 -->
+            </div>
+            <!-- end row -->
+        </h:form>
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>

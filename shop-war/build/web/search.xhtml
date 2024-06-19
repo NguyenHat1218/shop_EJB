@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <div class="container">
+        <div class="body-content">
+            <h2>Search Product</h2>
+            <div class="form">
+                <h:form>
+                    <h:inputText value="#{searchMB.s}" class="search-txt"/>
+                    <h:commandButton action="#{searchMB.localeChanged()}" class="btn-search" value="Search"/>
+                </h:form>
+            </div>
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{cartMB.init()}" />
+            </f:metadata>
+            <div class="product-related">
+                <ul class="product-related__list">
+                    <c:forEach items="#{searchMB.listProducts}" var="productItem">
+                        <li>
+                            <h:form>
+                                <h:commandLink action="#{productMB.seeProduct(productItem.productID)}">
+                                    <img src="#{request.contextPath}/resources/thumbnail/#{productItem.thumbnail}"/>
+                                    <h2>#{productItem.productName}</h2>
+                                    <span class="price">$#{productItem.unitPrice}</span>
+                                </h:commandLink>
+                            </h:form>
+                            <h:form>
+                                <h:commandButton action="#{cartMB.orderBefore(productItem.productID)}" class="btn-order" value="Add to cart"/>
+                            </h:form>
+                        </li>
+                    </c:forEach>
+                </ul>
+                <!-- list related products -->
+            </div>
+        </div>
+    </div>
+    <ui:include src="footer.xhtml"/>
+</html>

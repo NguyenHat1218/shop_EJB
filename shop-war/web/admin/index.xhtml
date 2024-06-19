@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="row">
+            <div class="coso">
+                Dashboard
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 col-m-6 col-sm-6">
+                <div class="counter bg-primary">
+                    <p><i class="fas fa-users"></i></p>
+                    <h3>#{statisticMB.countUser()}+</h3>
+                    <p>Users</p>
+                </div>
+            </div>
+            <div class="col-3 col-m-6 col-sm-6">
+                <div class="counter bg-warning">
+                    <p><i class="fas fa-bars"></i></p>
+                    <h3>#{statisticMB.countProduct()}+</h3>
+                    <p>Products</p>
+                </div>
+            </div>
+            <div class="col-3 col-m-6 col-sm-6">
+                <div class="counter bg-success">
+                    <p><i class="fas fa-shopping-cart"></i></p>
+                    <h3>#{statisticMB.countOrder()}+</h3>
+                    <p>Orders</p>
+                </div>
+            </div>
+            <div class="col-3 col-m-6 col-sm-6">
+                <div class="counter bg-danger">
+                    <p><i class="fab fa-blogger-b"></i></p>
+                    <h3>#{statisticMB.countBlog()}+</h3>
+                    <p>Blogs</p>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>New Orders</h3>
+                    </div>
+                    <div class="card-content">
+                        <h:dataTable value="#{cpOrder.listOrders}" var="item">
+                            <h:column>
+                                <f:facet name="header">Order ID</f:facet>
+                                <h:outputText value="#{item.orderID}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Order Date</f:facet>
+                                <h:outputText value="#{item.orderDate}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Freight</f:facet>
+                                <h:outputText value="$#{item.freight}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Ship Address</f:facet>
+                                <h:outputText value="#{item.shipAddress}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Ship City</f:facet>
+                                <h:outputText value="#{item.shipCity}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                <h:form>
+                                    <h:commandButton rendered="#{item.status eq 0}" class="stt waiting" value="Waiting"></h:commandButton>
+                                    <h:commandButton rendered="#{item.status eq 1}" class="stt cancel" value="Cancel"></h:commandButton>
+                                    <h:commandButton rendered="#{item.status eq 2}" class="stt success" value="Success"></h:commandButton>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Process bar</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="process-wrapper">
+                            <p>
+                                Order in process
+                                <span class="float-right">#{statisticMB.barStatus(0)}%</span>
+                            </p>
+                            <div class="process">
+                                <div class="bg-warning" style="width:#{statisticMB.barStatus(0)}%"></div>
+                            </div>
+                        </div>
+                        <div class="process-wrapper">
+                            <p>
+                                Order in cancel
+                                <span class="float-right">#{statisticMB.barStatus(1)}%</span>
+                            </p>
+                            <div class="process">
+                                <div class="bg-danger" style="width:#{statisticMB.barStatus(1)}%"></div>
+                            </div>
+                        </div>
+                        <div class="process-wrapper">
+                            <p>
+                                Order in success
+                                <span class="float-right">#{statisticMB.barStatus(2)}%</span>
+                            </p>
+                            <div class="process">
+                                <div class="bg-success" style="width:#{statisticMB.barStatus(2)}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Main content -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>
+

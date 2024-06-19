@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/cart.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    </h:head>
+    <c:if test="#{empty user}">
+        <ui:insert name="metadata"/>
+        <f:event type="preRenderView" listener="#{customerMB.redirectLogin()}" />
+    </c:if>
+    <h:body>
+        <div class="wrap">
+            <div class="cart_left">
+                <div class="logo_image">
+                    <img src="https://i.ibb.co/jMqWMtw/t-i-xu-ng.png" alt=""/>
+                </div>
+                <div class="thanhtoan">
+                    <a href="">Cart > Payment</a>
+                </div>
+                <h:form>
+                    <div class="input">
+                        <div class="input_box">Ship Via</div>
+                        <div class="input_input">
+                            <h:selectOneMenu value="#{cartMB.shipID}">
+                                <f:selectItems value="#{cartMB.listShippers()}"
+                                               var="item" 
+                                               itemValue="#{item.shipperID}"
+                                               itemLabel="#{item.companyName}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <div class="input_box">
+                           Phone
+                        </div>
+                        <div class="input_input">
+                            <h:inputText value="#{cartMB.shipPhone}"/>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <div class="input_box">
+                            Ship Address
+                        </div>
+                        <div class="input_input">
+                            <h:inputText value="#{cartMB.shipAddress}"/>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <div class="input_box">
+                            Ship City
+                        </div>
+                        <div class="input_input">
+                            <h:inputText value="#{cartMB.shipCity}"/>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <div class="input_box">
+                            Ship Country
+                        </div>
+                        <div class="input_input">
+                            <h:inputText value="#{cartMB.shipCountry}"/>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <div class="text-right">
+                            <h:commandButton action="#{cartMB.paymentOrder()}" value="Continue to shopping" class="button-right">
+                            </h:commandButton>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <a href="">Return to cart</a>
+                    </div>
+                </h:form>
+
+            </div>
+            <div class="cart_hide" id="cart_hide"><i class="fas fa-cart-plus"></i> Show Product Order <span class="text-right">$ #{cardMB.getPayment()}</span></div>
+            <div class="cart-right">
+                <div class="cart_line">
+                    <table class="sanpham_bang">
+                        <c:forEach items="#{cartMB.cart}" var="item">
+                            <tr>
+                                <td class="hinh_sp">
+                                    <img src="#{request.contextPath}/resources/thumbnail/#{item.thumbnail}"/>
+                                    <span class="sp_soluong">#{item.quantity}</span>
+                                </td>
+                                <td class="sp_ten">
+                                    #{item.productName}
+                                </td>
+                                <td>
+                                    $ #{item.unitPrice}
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+                <div class="cart_line">
+                    Subtotal: <span class="text-right">$ #{cartMB.getPayment()}</span>
+                    <br/>
+                    Total: <span class="text-right">$ #{cartMB.getPayment()}</span>
+                </div>
+            </div>
+        </div>
+        <script>
+            var hide = document.querySelector("#cart_hide");
+            var clicks = false;
+            hide.addEventListener('click', function ()
+            {
+                if (clicks == false)
+                {
+                    hide.innerHTML = "Hide Product Order";
+                    clicks = true;
+                } else
+                {
+                    hide.innerHTML = "Show Product order";
+                    clicks = false;
+                }
+                var cart_right = document.querySelector(".cart-right");
+                cart_right.classList.toggle("display");
+            });
+        </script>
+    </h:body>
+</html>
+

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <div class="container">
+        <div class="body-content">
+            <div class="view-post-container">
+                <div class="view-post-banner">
+                    <img src="#{request.contextPath}/resources/blog/#{blogMB.blog.thumbnail}"/>
+                        <div class="view-post-infor">
+                            <h2>#{blogMB.blog.title}</h2>
+                            <p>#{blogMB.blog.createdat}</p>
+                        </div>
+                </div>
+                <!-- view post banner -->
+                <div class="view-post-layout">
+                    <div class="content-left">
+                        <div class="view-post-content">
+                            <h:outputText value="#{blogMB.blog.description}" escape="false"/>
+                        </div>
+                        <!-- view post content -->
+                    </div>
+                    <!-- content left -->
+                    <div class="content-right">
+                        <div class="category-name">KEEP IN TOUCH</div>
+                        <div class="about-me-info">
+                            <div class="social-media">
+                                <span class="item"><a href=""><i class="fab fa-facebook-f"></i></a></span>
+                                <span class="item"><a href=""><i class="fab fa-twitter"></i></a></span>
+                                <span class="item"><a href=""><i class="fab fa-instagram"></i></a></span>
+                            </div>
+                        </div>
+                        <div class="category-name">POPULAR POST</div>
+                        <div class="popular-post">
+                            <div class="popular-item">
+                                <div class="popular-item-img">
+                                    <a href=""><img src="http://max.soledad.pencidesign.com/wp-content/uploads/2015/08/jewellery-1170x780.jpg" alt=""/></a>
+                                    <span class="ranked-lg">1</span>
+                                </div>
+                                <div class="popular-item-info">
+                                    <h3 class="title"><a href="">Life is living in Moments</a></h3>
+                                    <p class="post-time">July 5, 2017</p>
+                                </div>
+                            </div>
+                            <!-- popular post item -->
+                            <div class="popular-item">
+                                <div class="popular-item-img">
+                                    <a href=""><img src="http://max.soledad.pencidesign.com/wp-content/uploads/2015/08/jewellery-1170x780.jpg" alt=""/></a>
+                                    <span class="ranked">2</span>
+                                </div>
+                                <div class="popular-item-info">
+                                    <h3 class="title"><a href="">Life is living in Moments</a></h3>
+                                    <p class="post-time">July 5, 2017</p>
+                                </div>
+                            </div>
+                            <!-- popular post item -->
+                            <div class="popular-item">
+                                <div class="popular-item-img">
+                                    <a href=""><img src="http://max.soledad.pencidesign.com/wp-content/uploads/2017/06/hangout.jpg"/></a>
+                                    <span class="ranked">3</span>
+                                </div>
+                                <div class="popular-item-info">
+                                    <h3 class="title"><a href="">Life is living in Moments</a></h3>
+                                    <p class="post-time">July 5, 2017</p>
+                                </div>
+                            </div>
+                            <!-- popular post item -->
+                        </div>
+                        <!-- popular post -->
+                    </div>
+                    <!-- content right -->
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!-- view post container -->
+        </div>
+    </div>
+    <ui:include src="footer.xhtml"/>
+</html>
+

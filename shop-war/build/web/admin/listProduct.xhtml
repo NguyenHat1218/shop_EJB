@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:include src="header.xhtml"/>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{productMB.initReset()}" />
+    </f:metadata>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>List Products</h3>
+        </div>
+        <div class="col-6 col-sm-6" style="margin-top:10px">
+            <h:link outcome="createProduct" class="button"><i class="fas fa-plus"></i> Create new</h:link>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>List Product</h3>
+                    </div>
+                    <div class="card-content">
+                        <h:dataTable value="#{productMB.listAllProducts}" var="item">
+                            <h:column>
+                                <f:facet name="header">Product</f:facet>
+                                <img src="#{request.contextPath}/thumbnail/#{item.thumbnail}" style="width: 120px;"/>
+                                
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Product Name</f:facet>
+                                <h:outputText value="#{item.productName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Unit Price</f:facet>
+                                <h:outputText value="$#{item.unitPrice}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Stock</f:facet>
+                                <h:outputText value="#{item.quantity}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                <h:outputText rendered="#{item.status eq 0}" value="Active"/>
+                                <h:outputText rendered="#{item.status eq 1}" value="Maintenance"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Operation</f:facet>
+                                <h:form>
+                                    <h:commandButton action="#{productMB.editProduct(item.productID)}" value="Edit" class="btn btn-warning-warning"/>
+                                    <h:commandButton action="#{productMB.delProduct(item.productID)}" value="Delete" class="btn btn-danger"/>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="pagination">
+                <h:form>
+                    <c:forEach var="page" begin="1" end="#{productMB.countPage()}">
+                        <h:commandButton action="#{productMB.showPagination(page)}" value="#{page}" class="page-item #{productMB.currentPage == page ? 'active': ''}"/>
+                    </c:forEach>
+                </h:form>
+            </div>
+        </div>
+        <!-- end row-->
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>

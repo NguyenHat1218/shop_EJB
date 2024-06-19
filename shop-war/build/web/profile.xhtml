@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <c:if test="#{empty user}">
+        <ui:insert name="metadata"/>
+        <f:event type="preRenderView" listener="#{customerMB.redirectLogin()}" />
+    </c:if>
+    <div class="container">
+        <div class="body-content">
+            <h2 class="title">Profile</h2>
+            <div class="profile">
+                <div class="center">
+                    <div class="profile-avatar">
+                        <img src="#{request.contextPath}/resources/img/avatar.jpg" alt=""/>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <table cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>Username</td>
+                            <td>#{customerMB.getInfo().username}</td>
+                        </tr>
+                        <tr>
+                            <td>Full name</td>
+                            <td>#{customerMB.getInfo().fullname}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <h:outputText rendered="#{customerMB.getInfo().gender eq 'f'}" value="Female"/>
+                                <h:outputText rendered="#{customerMB.getInfo().gender eq 'm'}" value="Male"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Birthday</td>
+                            <td><h:outputText value="#{customerMB.getInfo().birthday}">  
+                                    <f:convertDateTime pattern="yyyy-MM-dd"/>  
+                                </h:outputText></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>#{customerMB.getInfo().address}</td>
+                        </tr>
+                        <tr>
+                            <td>Favorite</td>
+                            <td>#{customerMB.getInfo().favorite}</td>
+                        </tr>
+                        <tr>
+                            <td>Post</td>
+                            <td>#{customerMB.getInfo().post}</td>
+                        </tr>
+                        <tr>
+                            <td>Active</td>
+                            <c:if test="#{customerMB.getInfo().block == 0}">
+                                <td><font color="green">activated</font></td>
+                            </c:if>
+                            <c:if test="#{customerMB.getInfo().block == 1}">
+                                <td><font color="red">blocked</font></td>
+                            </c:if>
+                        </tr>
+                        <tr>
+                            <td>Date join</td>
+                            <td>#{customerMB.getInfo().createdat}</td>
+                        </tr>
+                    </table>
+                    <div class="profile-more">
+                        <h:form>
+                            <h:commandLink action="#{customerMB.showEdit()}" class="btn-link"><i class="fas fa-user-cog"></i> Setting</h:commandLink>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ui:include src="footer.xhtml"/>
+</html>
+

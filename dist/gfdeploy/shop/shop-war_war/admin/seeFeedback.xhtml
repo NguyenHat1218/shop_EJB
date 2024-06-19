@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>See feedback details</h3>
+        </div>
+        <div class="col-6 col-sm-6" style="margin-top:10px">
+            <h:link outcome="listFeedback" class="button"><i class="fas fa-plus"></i> Back</h:link>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>#{cpFeedback.feedback.topic}</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            #{cpFeedback.feedback.message}
+                        </p>
+                        <p class="card-footer">
+                            <span>From #{cpFeedback.feedback.email}</span>
+                            <span class="card-times">#{cpFeedback.feedback.createdat}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row-->
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>

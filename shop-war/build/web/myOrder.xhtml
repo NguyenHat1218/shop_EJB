@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <c:if test="#{empty user}">
+        <ui:insert name="metadata"/>
+        <f:event type="preRenderView" listener="#{customerMB.redirectLogin()}" />
+    </c:if>
+    <div class="container">
+        <div class="body-content">
+            <h2>My Orders</h2>
+            <c:if test="#{ordersMB.myListOrder().size() == 0}">
+                <div class="empty">
+                    Oops, you don't have any order
+                </div>
+            </c:if>
+            <div class="list-orders">
+                <c:if test="#{ordersMB.myListOrder() != null and ordersMB.myListOrder().size() > 0}">
+                    <h:dataTable value="#{ordersMB.myListOrder()}" var="item" cellpadding="0" cellspacing="0" class="table">
+                        <h:column>
+                            <f:facet name="header">Oder ID</f:facet>
+                            <h:outputText value="#{item.orderID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Order Date</f:facet>
+                            <h:outputText value="#{item.orderDate}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Ship Via</f:facet>
+                            <h:outputText value="#{item.shipVia.companyName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Freight</f:facet>
+                            <h:outputText value="$#{item.shipVia.freight}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Ship Address</f:facet>
+                            <h:outputText value="#{item.shipAddress}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Phone</f:facet>
+                            <h:outputText value="#{item.shipPhone}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Ship City</f:facet>
+                            <h:outputText value="#{item.shipCity}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Ship Country</f:facet>
+                            <h:outputText value="#{item.shipCountry}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Status</f:facet>
+                            <h:form>
+                                <h:commandButton rendered="#{item.status eq 0}" class="stt waiting" value="Waiting"></h:commandButton>
+                                <h:commandButton rendered="#{item.status eq 1}" class="stt cancel" value="Cancel"></h:commandButton>
+                                <h:commandButton rendered="#{item.status eq 2}" class="stt success" value="Success"></h:commandButton>
+                            </h:form>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">See details</f:facet>
+                            <h:form>
+                                <h:commandButton action="#{ordersMB.seeOrderDetails(item.orderID)}" class="see-order" value="See details"/>
+                            </h:form>
+                        </h:column>
+                    </h:dataTable>
+                </c:if>
+                <c:if test="#{ordersMB.listOrDetails.size() > 0}">
+                    <div class="center"><h2>Information</h2></div>
+                    <h:dataTable value="#{ordersMB.listOrDetails}" var="item1" cellpadding="0" cellspacing="0" class="table">
+                        <h:column>
+                            <f:facet name="header">Product Image</f:facet>
+                            <img src="#{request.contextPath}/resources/thumbnail/#{ordersMB.getName(item1.orderDetailsPK.productID, 1)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Product Name</f:facet>
+                            <h:outputText value="#{ordersMB.getName(item1.orderDetailsPK.productID, 0)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Unit Price</f:facet>
+                            <h:outputText value="$#{item1.unitPrice}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Quantity</f:facet>
+                            <h:outputText value="#{item1.quantity}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Total</f:facet>
+                            <h:outputText value="$ #{item1.unitPrice*item1.quantity}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <div class="total">
+                        Total: <span>$ #{ordersMB.payment} (Shipping costs included)</span>
+                    </div>
+                </c:if>
+            </div>
+        </div>
+    </div>
+    <ui:include src="footer.xhtml"/>
+</html>
+

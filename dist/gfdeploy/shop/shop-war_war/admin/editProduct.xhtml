@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>Update product</h3>
+        </div>
+        <h:form enctype="multipart/form-data">
+            <div class="row">
+                <h:messages class="error"/>
+                <font color="red">#{productMB.msgError}</font>
+                <font color="green">#{productMB.msgSuccess}</font>
+                <div class="col-12">
+                    <div class="box-input">
+                        <p>Product name : </p>
+                        <h:inputText value="#{productMB.productName}" class="form-control" required="true" requiredMessage="Product name can not be blank"/>
+                    </div>
+                    <!-- end input -->
+                    <div class="box-input">
+                        <p>Description : </p>
+                        <h:inputTextarea value="#{productMB.description}" requiredMessage="Description can not be Blank" class="form-control" required="true" rows="10"/>
+                    </div>
+                    <div class="box-input">
+                        <p>Unit price : </p>
+                        <h:inputText value="#{productMB.unitPrice}" class="form-control" required="required"/>
+                    </div>
+                    <div class="box-input">
+                        <p>Quantity : </p>
+                        <h:inputText value="#{productMB.quantity}" class="form-control" required="required"/>
+                    </div>
+                    <div class="box-input">
+                        <p>Category : </p>
+                        <h:selectOneMenu value="#{productMB.categoryID}" class="form-control"> 
+                            <f:selectItems value="#{categoryMB.list}" var="itemCate" 
+                                           itemLabel="#{itemCate.categoryName}" 
+                                           itemValue="#{itemCate.categoryID}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="box-input">
+                        <p>Status : </p>
+                        <h:selectOneMenu value="#{productMB.status}" class="form-control">
+                            <f:selectItem itemLabel="Display" itemValue="0"/>
+                            <f:selectItem itemLabel="Hide" itemValue="1"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="box-input">
+                        <p>Thumbnail : Format of file upload just accept extension with .PNG, .JPEG, .JPG </p>
+                        <h:inputFile value="#{productMB.file}" class="form-control" onchange="previewFile();"/>
+                    </div>
+                    <div class="center">
+                        <img src="#{request.contextPath}/resources/thumbnail/#{productMB.product.thumbnail}" style="width:200px;"/>
+                    </div>
+                    <div class="form-group" id="imgThumbnail">
+
+                    </div>
+                    <div class="box-input">
+                        <p>More picture details : </p>
+                        <h:inputFile value="#{productMB.file1}" class="form-control file-input" pt:multiple="multiple" pt:accept="image/*" required="required"/>
+                    </div>
+                    <div class="list-preview">
+                        <c:forEach items="#{productMB.listImages}" var="itemPre">
+                            <div class="preview-item">
+                                <img src="#{request.contextPath}/resources/preview/#{itemPre.imagePath}" style="width:120px;"/>
+                                <h:commandLink action="#{productMB.delPreview(itemPre.imageID)}" class="pre-a">Delete</h:commandLink>
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div id="preview"></div>
+                    <div class="box-input">
+                        <div class="center">
+                            <h:commandButton action="#{productMB.saveProduct()}" class="btn btn-create" value="Update"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col 12 -->
+            </div>
+            <!-- end row -->
+        </h:form>
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+    <script>
+    function previewFile(input) {
+        var file = $("input[type=file]").get(0).files[0];
+        var preThum = document.querySelector('#imgThumbnail');
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                preThum.innerHTML = "";
+                var image = new Image();
+                image.width = 200;
+                image.title = file.name;
+                image.src = reader.result;
+                preThum.appendChild(image);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+    function previewImages() {
+
+        var preview = document.querySelector('#preview');
+        preview.innerHTML = "";
+
+        if (this.files) {
+            [].forEach.call(this.files, readAndPreview);
+        }
+
+        function readAndPreview(file) {
+
+            // Make sure `file.name` matches our extensions criteria
+            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                return alert(file.name + " is not an image");
+            } // else...
+
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                var image = new Image();
+                image.height = 100;
+                image.title = file.name;
+                image.src = this.result;
+                preview.appendChild(image);
+            });
+
+            reader.readAsDataURL(file);
+
+        }
+
+    }
+    document.querySelector('.file-input').addEventListener("change", previewImages);
+    </script>
+
+</html>

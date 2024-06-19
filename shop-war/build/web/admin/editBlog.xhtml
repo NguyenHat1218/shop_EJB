@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>Update Blog</h3>
+        </div>
+        <h:form enctype="multipart/form-data">
+            <div class="row">
+                <h:messages class="error"/>
+                <font color="red">#{productMB.msgError}</font>
+                <font color="green">#{productMB.msgSuccess}</font>
+                <div class="col-12">
+                    <h:inputHidden value="#{cpBlog.blogID}"/>
+                    <div class="box-input">
+                        <p>Title : </p>
+                        <h:inputText value="#{cpBlog.title}" class="form-control" required="true" requiredMessage="Title can not be blank"/>
+                    </div>
+                    <!-- end input -->
+                    <div class="box-input">
+                        <p>Description : </p>
+                        <h:inputTextarea value="#{cpBlog.description}" class="ckeditor" cols="30" rows="10" id="editor1" required="true" requiredMessage="Please, enter description"/>
+                    </div>
+                    <div class="box-input">
+                        <p>Thumbnail : Format of file upload just accept extension with .PNG, .JPEG, .JPG </p>
+                        <h:inputFile value="#{cpBlog.file}" class="form-control" onchange="previewFile();"/>
+                    </div>
+                    <div class="center">
+                        <img src="#{request.contextPath}/resources/blog/#{cpBlog.thumbnail}" style="width:200px;"/>
+                    </div>
+                    <div class="form-group" id="imgThumbnail">
+
+                    </div>
+                    <div class="box-input">
+                        <div class="center">
+                            <h:commandButton action="#{cpBlog.saveBlog()}" class="btn btn-create" value="Update"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col 12 -->
+            </div>
+            <!-- end row -->
+        </h:form>
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+    <script src="#{request.contextPath}/resources/js/ckeditor/ckeditor.js"></script>
+    <script>
+        $( 'textarea.ckeditor' ).ckeditor(); 
+    </script>
+    <script>
+    function previewFile(input) {
+        var file = $("input[type=file]").get(0).files[0];
+        var preThum = document.querySelector('#imgThumbnail');
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                preThum.innerHTML = "";
+                var image = new Image();
+                image.width = 200;
+                image.title = file.name;
+                image.src = reader.result;
+                preThum.appendChild(image);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+    </script>
+
+</html>

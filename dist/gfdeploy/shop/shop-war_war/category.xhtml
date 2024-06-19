@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <div class="body-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <span><a href="">Home</a></span>
+                <i class="fa fa-angle-right"></i>
+                <span><a href="">Category</a></span>
+                <i class="fa fa-angle-right"></i>
+                #{categoryMB.title}
+            </div>
+            <!-- title -->
+            <c:if test="#{cartMB.soldout == true}">
+                <div class="message-error">
+                    <i class="fas fa-times-circle"></i>
+                    Sorry, but the stock is out of stock !
+                </div>
+            </c:if>
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{cartMB.init()}" />
+            </f:metadata>
+           
+            <div class="product-related">
+                <ul class="product-related__list">
+                    <c:forEach items="#{categoryMB.listProducts}" var="productItem">
+                        <li>
+                            <h:form>
+                                <h:commandLink action="#{productMB.seeProduct(productItem.productID)}">
+                                    <img src="#{request.contextPath}/resources/thumbnail/#{productItem.thumbnail}"/>
+                                    <h2>#{productItem.productName}</h2>
+                                    <span class="price">$#{productItem.unitPrice}</span>
+                                </h:commandLink>
+                            </h:form>
+                             <c:if test="#{productItem.quantity == 0}">
+                                    <p class="soldout">Sold out</p>
+                                </c:if>
+                            <h:form>
+                                <h:commandButton action="#{cartMB.orderBefore(productItem.productID)}" class="btn-order" value="Add to cart"/>
+                            </h:form>
+                        </li>
+                    </c:forEach>
+                </ul>
+                <!-- list related products -->
+            </div>
+            <div class="center">
+                <div class="pagination">
+                    <h:form>
+                        <c:forEach var="page" begin="1" end="#{categoryMB.countPage()}">
+                            <h:commandButton action="#{categoryMB.showPagination(page)}" value="#{page}" class="page-item #{categoryMB.currentPage == page ? 'active': ''}"/>
+                        </c:forEach>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear-footer"></div>
+    <ui:include src="footer.xhtml"/>
+</html>

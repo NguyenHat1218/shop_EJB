@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>List Shippers</h3>
+        </div>
+        <div class="col-6 col-sm-6" style="margin-top:10px">
+            <h:link outcome="createShip" class="button"><i class="fas fa-plus"></i> Create new</h:link>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>List Shippers</h3>
+                    </div>
+                    <div class="card-content">
+                        <h:dataTable value="#{cpShipper.showAllShipper()}" var="item">
+                            <h:column>
+                                <f:facet name="header">Company Name</f:facet>
+                                <h:outputText value="#{item.companyName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Phone</f:facet>
+                                <h:outputText value="#{item.phone}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Freight</f:facet>
+                                <h:outputText value="$#{item.freight}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Operation</f:facet>
+                                <h:form>
+                                    <h:commandButton action="#{cpShipper.editShip(item.shipperID)}" value="Edit" class="btn btn-warning-warning"/>
+                                    <h:commandButton action="#{cpShipper.delShipper(item.shipperID)}" value="Delete" class="btn btn-danger-danger"/>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row-->
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>

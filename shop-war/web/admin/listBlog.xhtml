@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>List Blogs</h3>
+        </div>
+        <div class="col-6 col-sm-6" style="margin-top:10px">
+            <h:link outcome="createBlog" class="button"><i class="fas fa-plus"></i> Create new</h:link>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>List Blogs</h3>
+                    </div>
+                    <div class="card-content">
+                        <h:dataTable value="#{cpBlog.showAllBlog}" var="item">
+                            <h:column>
+                                <f:facet name="header">Thumbnail</f:facet>
+                                <img src="#{request.contextPath}/resources/blog/#{item.thumbnail}" style="width: 120px;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Blog Title</f:facet>
+                                <h:outputText value="#{item.title}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Created at</f:facet>
+                                <h:outputText value="#{item.createdat}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Operation</f:facet>
+                                <h:form>
+                                    <h:commandButton action="#{cpBlog.editBlog(item.blogID)}" value="Edit" class="btn btn-warning"/>
+                                    <h:commandButton action="#{cpBlog.delBlog(item.blogID)}" value="Delete" class="btn btn-danger"/>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+                <div class="center">
+                    <div class="pagination">
+                        <h:form>
+                            <c:forEach var="page" begin="1" end="#{cpBlog.countPage()}">
+                                <h:commandButton action="#{cpBlog.showPagination(page)}" value="#{page}" class="page-item #{productMB.currentPage == page ? 'active': ''}"/>
+                            </c:forEach>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row-->
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>

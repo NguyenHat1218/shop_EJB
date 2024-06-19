@@ -1,0 +1,103 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>SHOP PRODUCT ONLINE</title>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/admin.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </h:head>
+    <!-- Navbar -->
+    <c:if test="#{right != 'admin'}">
+        <ui:insert name="metadata"/>
+        <f:event type="preRenderView" listener="#{customerMB.redirectLogin()}" />
+    </c:if>
+    <div class="navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-bars" onclick="collapseSidebar();"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <img src="#{request.contextPath}/resources/img/logo1.png" class="logo" alt=""/>
+            </li>
+        </ul>
+        <!-- nav right -->
+        <!-- end navbar right -->
+    </div>
+    <!-- end navbar -->
+    <!-- Side bar -->
+    <div class="sidebar">
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-item has-sub">
+                <h:link outcome="index" class="sidebar-nav-link active">
+                    <div>
+                        <i class="fa fa-tachometer-alt"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </h:link>
+            </li>
+            <li class="sidebar-nav-item">
+                <h:link outcome="listCategory" class="sidebar-nav-link">
+                    <div>
+                        <i class="fas fa-align-justify"></i>
+                    </div>
+                    <span>Category</span>
+                </h:link>
+            </li>
+            <li  class="sidebar-nav-item">
+                <h:link outcome="listProduct" class="sidebar-nav-link">
+                    <div>
+                        <i class="fas fa-gifts"></i>
+                    </div>
+                    <span>Products</span>
+                </h:link>
+            </li>
+            <li  class="sidebar-nav-item">
+                <h:link outcome="listOrder" class="sidebar-nav-link">
+                    <div>
+                        <i class="fas fa-luggage-cart"></i>
+                    </div>
+                    <span>Orders</span>
+                </h:link>
+            </li>
+            <li  class="sidebar-nav-item">
+                 <h:link outcome="listCustomer" class="sidebar-nav-link">
+                    <div>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Customer</span>
+                </h:link>
+            </li>
+            <li  class="sidebar-nav-item">
+                 <h:link outcome="listBlog" class="sidebar-nav-link">
+                    <div>
+                        <i class="fab fa-blogger-b"></i>
+                    </div>
+                    <span>Blog</span>
+                </h:link>
+            </li>
+            <li  class="sidebar-nav-item">
+               <h:link outcome="listShip" class="sidebar-nav-link">
+                    <div>
+                        <i class="fas fa-people-carry"></i>
+                    </div>
+                    <span>Ship Company</span>
+                </h:link>
+            </li>
+            <li  class="sidebar-nav-item">
+                 <h:link outcome="listFeedback" class="sidebar-nav-link">
+                    <div>
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <span>Feedback</span>
+                </h:link>
+            </li>
+        </ul>
+    </div>
+    <!-- End sidebar -->
+</ui:composition>

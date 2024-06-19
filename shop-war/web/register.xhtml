@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Login</title>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/login.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="box">
+                <div class="form-login">
+                    <span class="title-login">Account Register</span>
+                    <c:if test="#{not empty customerMB.msg}">
+                        <div class="error">#{customerMB.msg}</div>
+                    </c:if>
+                    <h:form>
+                        <div class="input">
+                            <input type="text" jsf:id="username" name="username"
+                                   value="#{customerMB.username}" required="required" placeholder="Username"/>
+                        </div>
+                        <div class="input">
+                           <input type="password" jsf:id="password" name="password"
+                                  value="#{customerMB.password}" required="required" placeholder="Password"/>
+                        </div>
+                        <div class="input">
+                           <input type="text" jsf:id="fullname" name="fullname"
+                                  value="#{customerMB.fullname}" required="required" placeholder="Full name"/>
+                        </div>
+                        <div class="input-btn">
+                            <h:commandButton action="#{customerMB.registerNew()}" value="Sign up"/>
+                        </div>
+                    </h:form>
+                    <br/>
+                    <div class="center">
+                        Already have an account <h:link outcome="login">Login now</h:link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

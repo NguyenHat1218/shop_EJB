@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>List Categories</h3>
+        </div>
+        <div class="col-6 col-sm-6" style="margin-top:10px">
+            <h:link outcome="createCategory" class="button"><i class="fas fa-plus"></i> Create new</h:link>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>List categories</h3>
+                    </div>
+                    <div class="card-content">
+                        <h:dataTable value="#{categoryMB.list}" var="item">
+                            <h:column>
+                                <f:facet name="header">Category Name</f:facet>
+                                <h:outputText value="#{item.categoryName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                <h:outputText rendered="#{item.status eq 0}" value="Active"/>
+                                <h:outputText rendered="#{item.status eq 1}" value="Maintenance"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Operation</f:facet>
+                                <h:form>
+                                    <h:commandButton action="#{categoryMB.editCategory(item.categoryID)}" value="Edit" class="btn btn-warning"/>
+                                    <h:commandButton action="#{categoryMB.deleteCategory(item.categoryID)}" value="Delete" class="btn btn-danger"/>
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row-->
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>

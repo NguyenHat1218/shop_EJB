@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <!-- Main content -->
+    <div class="wrapper">
+        <div class="panel-title">
+            <h3>Edit Shipper</h3>
+        </div>
+        <h:form>
+            <div class="row">
+                <div class="col-12">
+                    <h:inputHidden value="#{cpShipper.shipperID}"/>
+                    <div class="box-input">
+                        <p>Company name : </p>
+                        <h:inputText value="#{cpShipper.companyName}" class="form-control"/>
+                    </div>
+                    <!-- end input -->
+                    <div class="box-input">
+                        <p>Phone : </p>
+                        <h:inputText value="#{cpShipper.phone}" class="form-control"/>
+                    </div>
+                    <div class="box-input">
+                        <p>Freight : </p>
+                        <h:inputText value="#{cpShipper.freight}" class="form-control"/>
+                    </div>
+                    <div class="box-input">
+                        <div class="center">
+                            <h:commandButton action="#{cpShipper.saveShipper()}" class="btn btn-create" value="Update"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col 12 -->
+            </div>
+            <!-- end row -->
+        </h:form>
+    </div>
+    <!-- end wrapper -->
+    <script src="#{request.contextPath}/resources/js/index.js"></script>
+</html>

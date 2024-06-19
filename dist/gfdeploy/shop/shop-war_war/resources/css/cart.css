@@ -1,0 +1,583 @@
+/*CSS written by HHD*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 11px;
+}
+body{
+    font-size: 11px;
+}
+/* Hiển thị chi tiết sản phẩm */
+.body_content{
+    width: 100%;
+    padding: 1rem;
+    margin-top: 8rem;
+    font-size: 12px;
+    margin-bottom: 9rem;
+}
+.product_tieude{
+    width: 100%;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+}
+.product_tieude a{
+    color: #000;
+}
+.product_tieude a:hover{
+    color: rgb(29, 153, 255);
+}
+.body_layout{
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+}
+.body_left{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.body_right{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 2rem;
+}
+.product_chitiet{
+    width: 100%;
+}
+.product_thumbial{
+    width: 100%;
+}
+.product_thumbial img{
+    width: 100%;
+}
+.product_list_album{
+    display: flex;
+}
+.product_list_album img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    flex: 1;
+    opacity: 0.4;
+    cursor: pointer;
+    border: 1px solid rgb(209, 209, 209);
+}
+img.preview{
+    opacity: 1;
+}
+.sanpham_ten{
+    font-size: 2rem;
+    padding: 0 2rem;
+}
+.sanpham_gia{
+    width: 100%;
+    padding: 1rem 2rem;
+}
+.sanpham_mua{
+    margin: 0 auto;
+    width: 100%;
+    padding: 1rem 2rem;
+}
+input.sanpham_cong, input.sanpham_tru{
+    outline: none;
+    width: 40px;
+    height: 40px;
+    float: left;
+    background-color: #fdb1c3;
+    border: none;
+    cursor: pointer;
+}
+input.soluong{
+    width: 50px;
+    height: 40px;
+    float: left;
+    text-align: center;
+    cursor: no-drop;
+    border: 1px solid #e1e1e1;
+}
+.sanpham_dathang{
+    width: 100%;
+    margin: 1rem 2rem;
+}
+.sanpham_dathang button.dathang{
+    width: 100%;
+    border: none;
+    background-color: #c5c5c5;
+    padding: 15px 20px;
+    color: rgb(0, 0, 0);
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+.sanpham_dathang button.mua{
+    width: 100%;
+    border: none;
+    background-color: #fdb1c3;
+    padding: 15px 20px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+.sanpham_dathang button:hover.dathang{
+    background-color: rgb(63, 63, 63);
+    color: #fff;
+}
+.sanpham_dathang button:hover.mua{
+    background-color: rgb(63, 63, 63);
+}
+.sanpham_more{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 2rem;
+}
+.more_content{
+    border: 1px solid #e1e1e1;
+}
+button.tab{
+    border: none;
+    background-color: #fff;
+    font-size: 1.3rem;
+    float: left;
+    border-right: 1px solid #d1d1d1;
+    padding: 10px 10px;
+    border-top: 1px solid #d1d1d1;
+    border-left: 1px solid #d1d1d1;
+}
+.more_content{
+    padding: 1rem 2rem;
+}
+@media screen and (max-width: 768px)
+{
+    .body_layout{
+        flex-direction: column;
+    }
+    .body_left{
+        width: 100%;
+    }
+    .body_right{
+        width: 100%;
+    }
+}
+.viewtab{
+    font-size: 1.3rem;
+}
+.page_title{
+    width: 100%;
+    padding: 1rem 2rem;
+    color: #000;
+}
+.page_title a{
+    color: #000;
+    letter-spacing: 1px;
+}
+.page_tieude{
+    font-size: 3rem;
+}
+/* Input form */
+.input{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+.input_input{
+    width: 100%;
+}
+.input_box{
+    width: 100%;
+    margin: 5px 0;
+}
+.input_input input{
+    width: 90%;
+    border: 1px solid #e1e1ee;
+    min-height: 35px;
+    outline-color: #fdb1c3;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+button.button{
+    background-color: #ecb1b0;
+    border: none;
+    padding: 15px 10px;
+    color: #fff;
+    cursor: pointer;
+    width: 90%;
+}
+button.button:hover{
+    background-color: rgb(53, 53, 53);
+}
+a.under{
+    text-decoration: underline;
+    color: #000;
+}
+a:hover.under{
+    color: rgb(32, 129, 255);
+}
+.collection{
+    width: 100%;
+}
+.collection img{
+    width: 100%;
+}
+/* Giao diện phần điền thông tin đặt hàng */
+.wrap{
+    display: flex;
+    font-size: 1.5rem;
+}
+.logo_image{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+.logo_image img{
+    max-height: 6rem;
+    margin: 0 auto;
+}
+.cart_left{
+    width: 50%;
+    padding-left: 5rem;
+    margin: 0 auto;
+    min-height: 100%;
+    padding-top: 4rem;
+    border-right: 1px solid #ddb2b2;
+}
+.cart-right{
+    width: 50%;
+    padding-right: 5rem;
+    margin: 0 auto;
+    min-height: 100%;
+    height: 100vh;
+    background-color: #ffdfdf;
+    padding-top: 4rem;
+    padding-left: 2rem;
+}
+.thanhtoan{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+}
+.thanhtoan a{
+    color: #000;
+}
+@media screen and (max-width: 768px)
+{
+    .wrap{
+        flex-direction: column;
+    }
+    .logo_image img{
+        max-height: 4rem;
+        margin: 0 auto;
+    }
+    .thanhtoan{
+        display: none;
+    }
+    .cart_left{
+        width: 100%;
+        padding-left: 1rem;
+        margin: 0 auto;
+        min-height: 100%;
+        padding-top: 2rem;
+    }
+    .cart-right{
+        width: 100%;
+        padding-right: 5rem;
+        margin: 0 auto;
+        min-height: 100%;
+        height: 100vh;
+        background-color: #ffdfdf;
+        padding-top: 4rem;
+        padding-left: 2rem;
+        margin-top: 1rem;
+    }
+}
+.input_input select{
+    width: 90%;
+    padding: 6px 5px;
+    cursor: pointer;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    outline-color: #fdb1c3;
+}
+/* The container */
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 25px;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .checkbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .checkbox .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .text-right{
+      text-align: right;
+      float: right;
+      font-weight: 600;
+  }
+.button-right{
+    margin-right: 2rem;
+    padding: 15px 15px;
+    cursor: pointer;
+    background-color: #ffb9ca;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    display: inline-block;
+    outline: none;
+}
+.button-right:hover{
+    background-color: #383838;
+    color: #fff;
+}
+a{
+    color: #000;
+}
+a:hover{
+    color: rgb(18, 150, 238);
+}
+table.sanpham_bang{
+    width: 100%;
+}
+
+td.hinh_sp{
+    width: 65px;
+    position: relative;
+}
+td.hinh_sp img{
+    border-radius: 10px;
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: 1px solid #e1e1ee;
+}
+span.sp_soluong{
+    background-color: rgb(109, 109, 109);
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    top: -.1rem;
+    right: -.7rem;
+    font-size: 12px;
+    font-weight: bold;
+}
+.cart_line{
+    width: 100%;
+    border-bottom: 1px solid rgba(179,156,156,0.34);
+    padding: 1rem 0;
+}
+table.sanpham_bang td{
+    padding: 10px 0;
+}
+td.sp_ten{
+    padding-left: 20px !important;
+    
+}
+input.gift{
+    width: 60%;
+    margin-right: 1rem;
+}
+.price_total{
+    padding: 10px 0px;
+}
+.cart_hide{
+    display: none;
+    background-color: rgb(207, 207, 207);
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+}
+@media screen and (max-width: 768px)
+{
+    .cart-right{
+        display: none;
+        height: 100%;
+    }
+    .cart_hide{
+        display: 100%;
+        display: block;
+    }
+    .display{
+        display: block;
+        transition: all 1s;
+    }
+}
+/* Modal dang nhao */
+.modal-bg{
+    position: fixed;
+    width: 100%;
+    min-height: 100%;
+    background-color: rgb(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2;
+    transition: visibility 1s opacity 1s;
+}
+.bg_active{
+    visibility: visible;
+    opacity: 1;
+}
+.modal{
+    width: 35%;
+    height: 35%;
+    background-color: #ffd7d7;
+    position: relative;
+    margin: 0 auto;
+}
+.modal-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 1rem;
+    padding: 2rem;
+}
+.modal-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.modal-body h2{
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 2rem;
+}
+.modal-body input{
+    width: 100%;
+    min-height: 3rem;
+    margin-top: 2rem;
+    padding: 3px 5px;
+    border-radius: 6px;
+    border: 1px solid #d1d1d1;
+}
+.modal-body button{
+    width: 100%;
+    min-height: 3rem;
+    background-color: #ecb1b0;
+    border: none;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+.modal-body button:hover{
+    background-color: rgb(73, 73, 73);
+    color: #fff;
+}
+.forgot{
+    width: 100%;
+    text-align: right;
+    padding: 10px 20px;
+}
+@media screen and (max-width: 768px)
+{
+    .modal{
+        width: 50%;
+        height: 50%;
+    }
+}
+@media screen and (max-width: 450px)
+{
+    .modal{
+        width: 80%;
+        height: 80%;
+    }
+}
+.collection_artist{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    flex-flow: row wrap;
+    text-align: center;
+}
+.collection_artist a{
+    width: 20%;
+    padding: 1rem;
+}
+@media screen and (max-width: 500px)
+{
+    .collection_artist a{
+        width: 50%;
+    }
+    .danhmuc{
+        font-size: 2rem !important;
+    }
+}

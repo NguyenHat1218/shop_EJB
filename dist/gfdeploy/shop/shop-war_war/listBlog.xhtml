@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="header.xhtml"/>
+    <div class="container">
+        <div class="body-content">
+            <h2 class="title">Blogs</h2>
+          <div class="blog-container">
+                <div class="blog-list">
+                    <c:forEach items="#{cpBlog.showAllBlog}" var="itemBlog">
+                        <div class="blog-item">
+                            <h:form>
+                                <h:commandLink action="#{blogMB.viewBlog(itemBlog.blogID)}">
+                                    <img src="#{request.contextPath}/resources/blog/#{itemBlog.thumbnail}"/>
+                                </h:commandLink>
+                            </h:form>
+                            <h3><a href="">#{itemBlog.title}</a></h3>
+                            <span class="blog-time">#{itemBlog.createdat}</span>
+                        </div>
+                    </c:forEach>
+                    <!-- item -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <ui:include src="footer.xhtml"/>
+</html>
+
